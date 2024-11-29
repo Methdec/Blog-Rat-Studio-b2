@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0 text-center">Ajouter un Post</h3>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                        <div class="mb-3">
+                            {{ form_label(form.title, 'Titre', { 'label_attr': { 'class': 'form-label' } }) }}
+                            {{ form_widget(form.title, { 'attr': { 'class': 'form-control' } }) }}
+                            {{ form_errors(form.title) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.content, 'Contenu', { 'label_attr': { 'class': 'form-label' } }) }}
+                            {{ form_widget(form.content, { 'attr': { 'class': 'form-control' } }) }}
+                            {{ form_errors(form.content) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.publishedAt, 'Date de publication', { 'label_attr': { 'class': 'form-label' } }) }}
+                            {{ form_widget(form.publishedAt, { 'attr': { 'class': 'form-control' } }) }}
+                            {{ form_errors(form.publishedAt) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.picture, 'URL de l’image', { 'label_attr': { 'class': 'form-label' } }) }}
+                            {{ form_widget(form.picture, { 'attr': { 'class': 'form-control' } }) }}
+                            {{ form_errors(form.picture) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.category, 'Catégorie', { 'label_attr': { 'class': 'form-label' } }) }}
+                            {{ form_widget(form.category, { 'attr': { 'class': 'form-select' } }) }}
+                            {{ form_errors(form.category) }}
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-success w-50">Ajouter</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

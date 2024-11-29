@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Inscription</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm p-4">
+                <!-- Affichage des erreurs globales -->
+                {{ form_errors(registrationForm) }}
+                {{ form_start(registrationForm) }}
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.email, 'Adresse e-mail', { 'label_attr': { class: 'form-label' } }) }}
+                        {{ form_widget(registrationForm.email, { 'attr': { class: 'form-control' } }) }}
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.first_name, 'Prénom', { 'label_attr': { class: 'form-label' } }) }}
+                        {{ form_widget(registrationForm.first_name, { 'attr': { class: 'form-control' } }) }}
+                        {{ form_errors(registrationForm.first_name) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.last_name, 'Nom', { 'label_attr': { class: 'form-label' } }) }}
+                        {{ form_widget(registrationForm.last_name, { 'attr': { class: 'form-control' } }) }}
+                        {{ form_errors(registrationForm.last_name) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.profile_picture, 'Photo de profil (URL)', { 'label_attr': { class: 'form-label' } }) }}
+                        {{ form_widget(registrationForm.profile_picture, { 'attr': { class: 'form-control' } }) }}
+                        {{ form_errors(registrationForm.profile_picture) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.plainPassword, 'Mot de passe', { 'label_attr': { class: 'form-label' } }) }}
+                        {{ form_widget(registrationForm.plainPassword, { 'attr': { class: 'form-control' } }) }}
+                        {{ form_errors(registrationForm.plainPassword) }}
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        {{ form_widget(registrationForm.agreeTerms, { 'attr': { class: 'form-check-input' } }) }}
+                        {{ form_label(registrationForm.agreeTerms, 'J’accepte les conditions d’utilisation.', { 'label_attr': { class: 'form-check-label' } }) }}
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">S’inscrire</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+    

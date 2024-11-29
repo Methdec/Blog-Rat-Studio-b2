@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h2>Détails du post</h2>
+        <a class="btn btn-primary w-25" href="{{ path('post_list') }}">Retour à la liste</a>    
+        <div class="text-center card shadow-sm">
+            <div class="card-body w-25 mx-auto text-center d-flex justify-content-center flex-column">
+                <h1 class="card-title">{{ post.title }}</h1>
+                <img class="card-img" src="{{ post.picture }}" alt="{{ post.title }}">
+                <p class="card-text">{{ post.content }}</p>
+                {% if is_granted('ROLE_ADMIN')%}
+                <form method="post" action="{{ path('post_delete', { id: post.id }) }}" onsubmit="return confirm('Êtes-vous sûr ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        <h2>Commentaires</h2>
+        {% if comments|length > 0 %}
+            <ul class="list-group">
+                {% for comment in comments %}
+                    <li class="list-group-item">
+                        <h5><strong>Auteur :</strong> {{ author.fullName }}</h5>
+                        {{ comment.createdAt|date('d/m/Y H:i') }} :
+                        {{ comment.content }}
+                        {% if is_granted('ROLE_ADMIN')%}
+                        <form method="post" action="{{ path('delete_comment', { id: comment.id }) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                            <button class="btn btn-danger btn-sm">Supprimer</button>
+                        </form>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aucun commentaire pour ce post.</p>
+        {% endif %}
+        {% if is_granted('ROLE_USER')%}
+        <div class="container mt-4">
+            <h2>Ajouter un commentaire</h2>
+            {{ form_start(form) }}
+                {{ form_row(form.content) }}
+                <button class="btn btn-success mt-2">Ajouter</button>
+            {{ form_end(form) }}
+        </div>
+        {% else %}
+            {% if is_granted('ROLE_VISITEUR')%}
+            <div class="container mt-4">
+                <h5>Vous ne pouvez pas ajouter de commentaire</h5>
+            </div>
+            {% else %}
+                <div class="container mt-4">
+                    <h5>Vous devez être connécté pour ajouter un commentaire</h5>
+                </div>
+            {% endif %}
+            <br>
+            <br>
+            <br>
+        {% endif %}
+    </div>
+{% endblock %}

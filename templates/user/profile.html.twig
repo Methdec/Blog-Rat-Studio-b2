@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title">Profil de {{ user.getFullName() }}</h2>
+                </div>
+                <div class="card-body">
+                    <img 
+                        src="{{ user.profilePicture }}" 
+                        alt="Photo de profil" 
+                        class="rounded-circle mb-3"
+                        style="width: 150px; height: 150px; object-fit: cover;"
+                    >
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Email :</strong> {{ user.email }}</li>
+                        <li class="list-group-item"><strong>Date de création :</strong> {{ user.createdAt|date('d/m/Y H:i') }}</li>
+                        <li class="list-group-item"><strong>Dernière mise à jour :</strong> {{ user.updatedAt|date('d/m/Y H:i') }}</li>
+                        <li class="list-group-item"><strong>Rôles :</strong> {{ user.roles|join(', ') }}</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('app_logout') }}" class="btn btn-danger">Se déconnecter</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

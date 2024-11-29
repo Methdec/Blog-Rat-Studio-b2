@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des categories{% endblock %}
+        {% block body %}
+            <h1>Liste des categories</h1>
+                    {% for category in categorys %}
+                            <div class="card mb-4 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ category.name }}</h5>
+                                    <p class="card-text">{{ category.description }}</p>
+                                    <a class="btn btn-primary w-100" href="{{ path('posts_by_category', { id: category.id }) }}">Voir détails</a>
+                                </div>
+                            </div>
+                    {% endfor %}
+        {% endblock %}
